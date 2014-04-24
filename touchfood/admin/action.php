@@ -23,9 +23,9 @@ while ($row = mysql_fetch_assoc($qryProdutoMax)) {
     $prod_id = $row['ultimoproduto'];
 }
 
-while ($row = mysql_fetch_assoc($qryAdcionalMax)) {
-    $ad_id = $row['ultimoadcionais'];
-}
+//while ($row = mysql_fetch_assoc($qryAdcionalMax)) {
+  //  $ad_id = $row['ultimoadcionais'];
+//}
 
 switch ($action) {
     case "insertMesa":
@@ -38,6 +38,28 @@ switch ($action) {
 		
     case "updateMesa":
         echo "i equals 1";
+        break;
+		
+	 case "insertComanda":
+	 
+	 	$id = $_REQUEST['produto'];
+		$result = mysql_query("select * from prod_produto where prod_id = '". $id."'")or die(mysql_error());  
+		$row = mysql_fetch_array($result);
+		if($row['prod_tipo']=="C"){
+		$produtoID = null;
+		$adicionalID = $_REQUEST['produto'];
+		}else{
+		$produtoID = $_REQUEST['produto'];
+		$adicionalID = null;	
+		}
+		
+		$mesaID = $_REQUEST['mesa'];
+		$garsomID = $_REQUEST['garsom'];
+		
+        mysql_query("INSERT INTO `co_comanda`(`co_id`, `co_mesa`, `co_garcom`, `co_produto`, `co_adicional`) 
+		VALUES ('','".$mesaID."','".$garsomID."','".$produtoID."','".$adicionalID."')")or die(mysql_error());
+        echo '<div class="alert alert-success">cadastrado com sucesso!</div>';
+     
         break;
 		
 	case "insertFuncionario":
@@ -77,7 +99,48 @@ switch ($action) {
 	break;
 	
 	case "abrirMesa":
-		mysql_query("uptade mes_mesa set mes_status = 'O' where mes_id = '1'")or die(mysql_error());
+		
+		if (isset($_POST['mesa'])) {
+		$selected_mesa = $_POST['mesa'];			
+		mysql_query("update mes_mesa set mes_status = 'O' where mes_id = '".$selected_mesa."'")or die(mysql_error());
+		echo '<div class="alert alert-success">Aberta com sucesso!</div>';
+		
+		
+			
+		echo"<form name=\"abrirMesa\" method=\"post\" action=\"inicio.php\">							
+				<input type=\"hidden\"  name=\"id\" value=\"$selected_mesa\">					   
+			</form>"; 
+        echo "<script>document.abrirMesa.submit()</script>";
+		
+     
+		}else{
+			echo '<div class="alert alert-danger">Mesa não foi Aberta!</div>';
+        	echo "<script> setTimeout(\"window.location = 'frmAbreMesa.php'\",1000)</script>";
+			}
+	break;
+	case "fecharMesa":
+		
+		if (isset($_POST['mesa'])) {
+		$selected_mesa = $_POST['mesa'];			
+		mysql_query("update mes_mesa set mes_status = 'F' where mes_id = '".$selected_mesa."'")or die(mysql_error());
+		echo '<div class="alert alert-success">Aberta com sucesso!</div>';
+        echo "<script>window.location = 'inicio.php'</script>";
+		}else{
+			echo '<div class="alert alert-danger">Mesa não foi Aberta!</div>';
+        	echo "<script> setTimeout(\"window.location = 'frmAbreMesa.php'\",1000)</script>";
+			}
+	break;
+		case "reservaMesa":
+		
+		if (isset($_POST['mesa'])) {
+		$selected_mesa = $_POST['mesa'];			
+		mysql_query("update mes_mesa set mes_status = 'R' where mes_id = '".$selected_mesa."'")or die(mysql_error());
+		echo '<div class="alert alert-success">Reservada com sucesso!</div>';
+        echo "<script>window.location = 'inicio.php'</script>";
+		}else{
+			echo '<div class="alert alert-danger">Mesa não foi Aberta!</div>';
+        	echo "<script> setTimeout(\"window.location = 'frmResevarMesa.php'\",1000)</script>";
+			}
 	break;
 }
 

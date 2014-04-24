@@ -1,37 +1,73 @@
 <?php
 $qryMesa = mysql_query("select * from mes_mesa") or die(mysql_error());
 ?>
-<form action="views/modalComanda.php" method="post">
     <div class="container">
         <div class="row">
+        <ul class="thumbnails">
             <?php while ($row = mysql_fetch_array($qryMesa)) { 
-					if($row['mes_status'] == 'F'){
-						$staus = "Fechada";
-					}else{
-						if($row['mes_status'] == 'A'){
-							$staus = "Aberta";
-						}else{
-							if($row['mes_status'] == 'O'){
-							$staus = "Ocupada";
-						}else{
-							if($row['mes_status'] == 'R'){
+					  switch($row['mes_status']){
+			  case "F":
+			  
+					  $cor = "btn-inverse";
+					  $staus = "Fechada";
+					   $imagem="../imagens/mesaFechada.png";
+				  break;
+			  case "A":
+			  			  $cor = "btn-success";
+						  $staus = "Aberta";
+						  $imagem="../imagens/mesaLivre.png";
+					  break;
+			 case "O":
+			  $cor = "btn-success";
+						  $cor = "btn-danger";
+						  $staus = "Ocupada";
+						    $imagem="../imagens/mesaOcupada.png";
+					  break;
+			 case "R":
+			  			  $cor = "btn-info";	
 							$staus = "Reservada";
-						}
-							}
-						}
-					}
+							  $imagem="../imagens/mesaResevada.png";
+					  break;
+				
+				}
 			?>
-                <form action="views/modalComanda.php" method="post">
-                <div class="col-lg-2">
-                    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                        <?php echo "Mesa" . $row['mes_id']." - ".$staus; ?>
-                    </button>
-                </div><!-- /.col-lg-2 -->
-                </form>
+            
+            	<li>
+                    <form action="inicio.php" method="post">
+                         <button class="btn <?php echo $cor?> mesa" name="mesa" rel="tooltip" title="Ver Mesa" value="<?php echo $row['mes_id']; ?>"  > 
+							<h2><?php echo $row['mes_id'].""//. $staus; ?>   </h2>                                
+                            <img  src="<?php echo $imagem?>" class=""/>
+                         </button>
+                   		<input type="hidden" name="statusBtn" value="<?php echo $staus ?>" />
+                    </form>
+                </li>
+             
             <?php } ?>
+            </ul>
         </div><!-- DIV ROW-->
     </div> <!-- /container -->
-</form>
+
 <?php
-include './views/modalComanda1.php';
+
+if(isset($_POST['statusBtn'])){			
+	switch($_POST['statusBtn']){
+		 case "Ocupada":
+				$id = $_POST['mesa'];
+				include './views/modalComanda.php';
+		 break;
+		 case "Fechada":
+				$id = $_POST['mesa'];
+			   include './views/modalAbrirReservar.php';
+		 break;
+		}
+}
+
 ?>
+<script type="text/javascript">
+
+$('.mesa').tooltip()
+$('#myModal').modal();
+$('a').tooltip();
+$('button').tooltip();
+
+</script>
