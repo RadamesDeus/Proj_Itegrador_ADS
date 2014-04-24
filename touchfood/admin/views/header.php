@@ -14,6 +14,9 @@
 
     <!-- Custom styles for this template -->
         <link href="../css/navbar-fixed-top.css" rel="stylesheet">
+        
+    <!-- Plugin -->
+  	<link rel="stylesheet" href="../assets/plugins/filtro/css/sorting.css" />    
    
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -147,7 +150,7 @@ a.thumbnail:focus {
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="../assets/js/jquery.js"></script>
+    <script src="../assets/js/jquery-1.8.2.min.js"></script>
     <script src="../dist/js/bootstrap.min.js"></script>
     <script src="../dist/js/bootstrap-button.js"></script>
     

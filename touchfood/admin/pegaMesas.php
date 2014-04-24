@@ -3,7 +3,17 @@ $qryMesa = mysql_query("select * from mes_mesa") or die(mysql_error());
 ?>
     <div class="container">
         <div class="row">
-        <ul class="thumbnails">
+        <div class="w">
+        	<div class="sort" id="sort">
+				<ul class="list-inline">
+                	<li><a href="#" rel="tooltip" title="Ver todas" class="all selected">Todos</a></li>
+                	<li><a href="#" rel="tooltip" title="Apenas Fechada" class="Fechada">Fechados</a></li>
+                	<li><a href="#" rel="tooltip" title="Apenas Ocupada" class="Ocupada">Ocupados</a></li>
+                	<li><a href="#" rel="tooltip" title="Apenas Reservada" class="Reservada">Resevados</a></li>
+                 </ul>
+            </div>
+        			
+        <ul class="portfolio clearfix list-inline list-unstyled">
             <?php while ($row = mysql_fetch_array($qryMesa)) { 
 					  switch($row['mes_status']){
 			  case "F":
@@ -32,7 +42,7 @@ $qryMesa = mysql_query("select * from mes_mesa") or die(mysql_error());
 				}
 			?>
             
-            	<li>
+            	<li data-id="id-<?php echo $row['mes_id'] ?>" class="<?php echo $staus ?>">
                     <form action="inicio.php" method="post">
                          <button class="btn <?php echo $cor?> mesa" name="mesa" rel="tooltip" title="Ver Mesa" value="<?php echo $row['mes_id']; ?>"  > 
 							<h2><?php echo $row['mes_id'].""//. $staus; ?>   </h2>                                
@@ -44,6 +54,7 @@ $qryMesa = mysql_query("select * from mes_mesa") or die(mysql_error());
              
             <?php } ?>
             </ul>
+            </div><!-- DIV W-->
         </div><!-- DIV ROW-->
     </div> <!-- /container -->
 
@@ -63,11 +74,16 @@ if(isset($_POST['statusBtn'])){
 }
 
 ?>
+<!-- JS Implementing Plugins -->           
+<script type="text/javascript" src="../assets/plugins/filtro/js/jquery.quicksand.js"></script>
+<script type="text/javascript" src="../assets/plugins/filtro/js/sorting.js"></script>
+
+
 <script type="text/javascript">
 
 $('.mesa').tooltip()
 $('#myModal').modal();
 $('a').tooltip();
-$('button').tooltip();
+$('button').tooltip();// JavaScript Document
 
 </script>

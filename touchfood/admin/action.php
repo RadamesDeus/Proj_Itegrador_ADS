@@ -103,14 +103,17 @@ switch ($action) {
 		if (isset($_POST['mesa'])) {
 		$selected_mesa = $_POST['mesa'];			
 		mysql_query("update mes_mesa set mes_status = 'O' where mes_id = '".$selected_mesa."'")or die(mysql_error());
-		echo '<div class="alert alert-success">Aberta com sucesso!</div>';
+		echo $selected_mesa;
+		echo '  <div class="container"><div class="alert alert-success">Aberta com sucesso!</div></div>';
 		
 		
 			
 		echo"<form name=\"abrirMesa\" method=\"post\" action=\"inicio.php\">							
 				<input type=\"hidden\"  name=\"id\" value=\"$selected_mesa\">					   
 			</form>"; 
-        echo "<script>document.abrirMesa.submit()</script>";
+        echo "<script>
+			setTimeout(\"document.abrirMesa.submit()\",800)
+		</script>";
 		
      
 		}else{

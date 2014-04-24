@@ -56,7 +56,7 @@ FROM (
                                             <button class=" btn btn-danger" name="acao" value="abrirMesa" >
                                             	<h3>Abrir</h3> <img src="../imagens/mesaOcupada.png" >
                                              </button>
-                                            <input type="hidden"  name="mesa" value="$id">					   
+                                            <input type="hidden"  name="mesa" value="<?php echo $id ?>">					   
                                          </form>
                             </div>
                        	<div class="col-lg-6 aliamento">
@@ -66,7 +66,7 @@ FROM (
                                      <button class="btn btn-large btn-info" name="acao" value="reservaMesa" >
                                      	<h3>Reservar</h3> <img src="../imagens/mesaResevada.png" >
                                       </button>
-                                     <input type="hidden"  name="mesa" value="$id">	
+                                     <input type="hidden"  name="mesa" value="<?php echo $id ?>">	
                                     </form> 
                                     </li>
                     </div>
