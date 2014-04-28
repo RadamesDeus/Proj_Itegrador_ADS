@@ -57,6 +57,9 @@ $qryMesa = mysql_query("select * from mes_mesa") or die(mysql_error());
             </div><!-- DIV W-->
         </div><!-- DIV ROW-->
     </div> <!-- /container -->
+    
+    
+
 
 <?php
 
@@ -69,6 +72,14 @@ if(isset($_POST['statusBtn'])){
 		 case "Fechada":
 				$id = $_POST['mesa'];
 			   include './views/modalAbrirReservar.php';
+		 break;
+		  case "Reservada":
+				$id = $_POST['mesa'];
+			    echo "<script>window.location = 'frmAbreMesaReserva.php'</script>";
+		 break;
+		   case "sucesso":
+				$id = $_POST['mesa'];
+			   include './views/modalSucesso.php';
 		 break;
 		}
 }

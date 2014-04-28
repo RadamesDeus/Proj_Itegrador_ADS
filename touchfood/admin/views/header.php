@@ -153,6 +153,6 @@ a.thumbnail:focus {
     <script src="../assets/js/jquery-1.8.2.min.js"></script>
     <script src="../dist/js/bootstrap.min.js"></script>
     <script src="../dist/js/bootstrap-button.js"></script>
-    
+   
   </body>
 </html>

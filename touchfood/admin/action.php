@@ -58,8 +58,14 @@ switch ($action) {
 		
         mysql_query("INSERT INTO `co_comanda`(`co_id`, `co_mesa`, `co_garcom`, `co_produto`, `co_adicional`) 
 		VALUES ('','".$mesaID."','".$garsomID."','".$produtoID."','".$adicionalID."')")or die(mysql_error());
-        echo '<div class="alert alert-success">cadastrado com sucesso!</div>';
-     
+	
+		echo"<form name=\"insertComanda\" method=\"post\" action=\"inicio.php\">							
+				  <input type=\"hidden\" name=\"mesa\" value=\" $id \" />
+                  <input type=\"hidden\" name=\"statusBtn\" value=\"sucesso\" />				   
+			</form>"; 
+        echo "<script>document.insertComanda.submit()</script>";
+	
+	
         break;
 		
 	case "insertFuncionario":
@@ -103,19 +109,17 @@ switch ($action) {
 		if (isset($_POST['mesa'])) {
 		$selected_mesa = $_POST['mesa'];			
 		mysql_query("update mes_mesa set mes_status = 'O' where mes_id = '".$selected_mesa."'")or die(mysql_error());
-		echo $selected_mesa;
-		echo '  <div class="container"><div class="alert alert-success">Aberta com sucesso!</div></div>';
 		
+	
 		
-			
-		echo"<form name=\"abrirMesa\" method=\"post\" action=\"inicio.php\">							
-				<input type=\"hidden\"  name=\"id\" value=\"$selected_mesa\">					   
+		echo"<form name=\"form\" method=\"post\" action=\"inicio.php\">							
+				  <input type=\"hidden\" name=\"mesa\" value=\" $selected_mesa \" />
+                  <input type=\"hidden\" name=\"statusBtn\" value=\"sucesso\" />				   
 			</form>"; 
-        echo "<script>
-			setTimeout(\"document.abrirMesa.submit()\",800)
-		</script>";
-		
-     
+        echo "<script>document.form.submit()</script>";
+	
+	
+    
 		}else{
 			echo '<div class="alert alert-danger">Mesa não foi Aberta!</div>';
         	echo "<script> setTimeout(\"window.location = 'frmAbreMesa.php'\",1000)</script>";

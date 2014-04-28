@@ -192,31 +192,60 @@ FROM (
       <div class="modal-footer">
       	<div class="row">
         	<div class="col-lg-12">
-      			<select class="form-control">
-        			
-            		<option>Bebida</option>
-            		<option>Alimentos</option>
-            		<option>Adicionais</option>
+      			<select name="adicional" id="adicional" class="form-control">
+        			<option value="" >Escolher Lançamentos</option>
+            		<option value="A">Alimentos</option>
+					<option value="B">Bebida</option>           		
+            		<option value="C">Adicionais</option>
         		</select>
             </div>
         </div>
         <br>
         <div class="row">
         	<div class="col-lg-10">
-      			<select class="form-control">
-        			<option>Refrigerante Kuat 350ml</option>
-            		<option>Isca de Frango</option>
-            		<option>Couvert Artístico</option>
-        		</select>
-            </div>
-        	<div class="col-lg-2">
-            	<input type="text" class="form-control">
-            </div>
+                       
+                <form action="action.php" method="POST">
+                <select name="produto" id="produto" class="form-control">
+                        <!-- <option> que é inseridas pelo javascript -->    
+                </select>
+             </div>     
+             <div class="col-lg-2">
+                <input type="text" class="form-control">
+             </div>
+        
         </div>
         <br>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary">Lançar</button>
+        
+          <div class="row">
+                <div class="col-lg-6">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                </div>
+                <div class="col-lg-2">
+                   
+                         <button type="submit" class="btn btn-primary">Lançar</button>
+                         <input type="hidden" name="mesa" value="<?php echo $id ?>" />
+                         <input type="hidden" name="acao" value="insertComanda"  />
+                          <input type="hidden" id="garsom" name="garsom" value="1">
+                    </form>
+                 </div>
+                 <div class="col-lg-2">   
+                    <form method="post" action="action.php">							
+                       <button class=" btn btn-inverse" name="acao" value="fecharMesa" >Fechar Mesa</button>
+                       <input type="hidden"  name="mesa" value="<?php echo $id ?>">					   
+                    </form>
+                 </div>
+     	 </div>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#adicional').change(function(){
+	        $('#produto').load('produtos.php?ad='+$('#adicional').val() );
+    });
+});
+
+</script>
+
