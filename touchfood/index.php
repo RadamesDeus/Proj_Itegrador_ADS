@@ -30,18 +30,11 @@
       <form class="form-signin" method="post" action="validaLogin.php">
       	<center><img src="imagens/ipad-147691.png" style="width:300px"></center>
         <br>
-        <label>Nome:</label>
-        <input type="text" id="usuario" name="usuario" class="form-control" placeholder="Digite seu usuário" autofocus>
-          <br>
-         <label>Senha:</label>
-        <input type="password" id="senha" name="senha" class="form-control" placeholder="Digite sua senha"> 
-        <p align="right"> <a title="teste"> Precisa de ajuda?</a></p>
+        <input type="text" id="usuario" name="usuario" class="form-control" placeholder="Usuário" autofocus>
+        <input type="password" id="senha" name="senha" class="form-control" placeholder="Senha">
+        <br>
         <input class="btn btn-lg btn-primary btn-block" type="submit">
-     
-        
-         
       </form>
-   
 
     </div> <!-- /container -->
 
